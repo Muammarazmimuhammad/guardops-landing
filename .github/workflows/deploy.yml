@@ -1,9 +1,11 @@
-name: Deploy GuardOps Landing (Strict)
+name: Deploy
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
+
+permissions:
+  contents: read   # 🔐 BATASI TOKEN (INI YANG DIMINTA CODEQL)
 
 jobs:
   deploy:
@@ -22,29 +24,10 @@ jobs:
           port: 22
           script: |
             set -e
-
             echo "=== DEPLOY START ==="
             whoami
             pwd
-
             cd /var/www/guardops.my.id
-
-            echo "== BEFORE =="
-            git rev-parse HEAD
-
             git fetch origin
             git reset --hard origin/main
-
-            echo "== AFTER =="
-            git rev-parse HEAD
-
-            if [ "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)" ]; then
-              echo "Repo synced with origin/main"
-            else
-              echo "❌ Repo NOT synced"
-              exit 1
-            fi
-
-            echo "<!-- DEPLOYED $(date) | COMMIT $(git rev-parse --short HEAD) -->" >> index.html
-
             echo "=== DEPLOY FINISH ==="

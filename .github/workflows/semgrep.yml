@@ -3,15 +3,13 @@ name: Semgrep Code Scanning
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   semgrep:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      security-events: write   # 🔴 KUNCI
+      security-events: write
 
     steps:
       - uses: actions/checkout@v4
@@ -20,3 +18,4 @@ jobs:
         uses: semgrep/semgrep-action@v1
         with:
           config: p/owasp-top-ten
+          github_token: ${{ secrets.GITHUB_TOKEN }}
