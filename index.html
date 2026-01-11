@@ -360,40 +360,82 @@
         </div>
     </section>
 
-    <footer id="contact" class="bg-cyber-card border-t border-slate-800 pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-                <div class="col-span-1 md:col-span-2 reveal-element">
-                    <span class="font-tech text-2xl font-bold text-white tracking-wider">
-                        Guard<span class="text-cyber-accent">Ops</span>
-                    </span>
-                    <p class="mt-4 text-slate-500 max-w-sm">
-                        Menyediakan layanan keamanan jaringan tergacor di Asia Tenggara. Melindungi batasan digital Anda dengan teknologi adaptif dan terautomasi.
-                    </p>
-                </div>
-                <div class="reveal-element delay-100">
-                    <h4 class="text-white font-bold mb-4">Layanan</h4>
-                    <ul class="space-y-2 text-slate-500 text-sm">
-                        <li><a href="#" class="hover:text-cyber-accent transition-colors">SOC Monitoring</a></li>
-                        <li><a href="#" class="hover:text-cyber-accent transition-colors">Penetration Testing</a></li>
-                        <li><a href="#" class="hover:text-cyber-accent transition-colors">Cloud Security</a></li>
-                        <li><a href="#" class="hover:text-cyber-accent transition-colors">Consulting</a></li>
-                    </ul>
-                </div>
-                <div class="reveal-element delay-200">
-                    <h4 class="text-white font-bold mb-4">Kontak</h4>
-                    <ul class="space-y-2 text-slate-500 text-sm">
-                        <li class="flex items-center gap-2"><i class="fas fa-envelope text-cyber-accent"></i> contact@guardops.id</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-phone text-cyber-accent"></i> +62 21 555 0123</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-map-marker-alt text-cyber-accent"></i> Jakarta, Indonesia</li>
-                    </ul>
+    <footer id="contact" class="relative bg-cyber-card pt-20 pb-10 overflow-hidden">
+    <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyber-accent to-transparent opacity-50"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            
+            <div class="col-span-1 lg:col-span-1 reveal-element">
+                <span class="font-tech text-3xl font-bold text-white tracking-wider flex items-center gap-2">
+                    <i class="fas fa-shield-alt text-cyber-accent"></i>
+                    Guard<span class="text-cyber-accent">Ops</span>
+                </span>
+                <p class="mt-4 text-slate-400 text-sm leading-relaxed">
+                    Menyediakan layanan keamanan jaringan terdepan di Asia Tenggara. Melindungi aset digital Anda dengan teknologi AI adaptif.
+                </p>
+                <div class="mt-6 flex space-x-4">
+                    <a href="#" class="text-slate-400 hover:text-cyber-accent hover:-translate-y-1 transition-all duration-300">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="#" class="text-slate-400 hover:text-cyber-accent hover:-translate-y-1 transition-all duration-300">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="#" class="text-slate-400 hover:text-cyber-accent hover:-translate-y-1 transition-all duration-300">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
                 </div>
             </div>
-            <div class="border-t border-slate-800 pt-8 text-center text-slate-600 text-sm">
-                <p>&copy; 2025 GuardOps Security. All rights reserved.</p>
+
+            <div class="reveal-element delay-100">
+                <h4 class="text-white font-bold mb-6 border-l-4 border-cyber-accent pl-3">Layanan</h4>
+                <ul class="space-y-3 text-slate-400 text-sm">
+                    <li><a href="#" class="hover:text-cyber-accent hover:pl-2 transition-all duration-300">SOC Monitoring</a></li>
+                    <li><a href="#" class="hover:text-cyber-accent hover:pl-2 transition-all duration-300">Penetration Testing</a></li>
+                    <li><a href="#" class="hover:text-cyber-accent hover:pl-2 transition-all duration-300">Cloud Security</a></li>
+                    <li><a href="#" class="hover:text-cyber-accent hover:pl-2 transition-all duration-300">Incident Response</a></li>
+                </ul>
+            </div>
+
+            <div class="reveal-element delay-200">
+                <h4 class="text-white font-bold mb-6 border-l-4 border-cyber-accent pl-3">Hubungi Kami</h4>
+                <ul class="space-y-4 text-slate-400 text-sm">
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-envelope text-cyber-accent mt-1"></i> 
+                        <span class="hover:text-white transition-colors cursor-pointer">contact@guardops.id</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-phone text-cyber-accent mt-1"></i> 
+                        <span class="hover:text-white transition-colors cursor-pointer">+62 21 555 0123</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-map-marker-alt text-cyber-accent mt-1"></i> 
+                        <span>Cyber 2 Tower, Jl. H.R. Rasuna Said, Jakarta, Indonesia</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="reveal-element delay-300">
+                <h4 class="text-white font-bold mb-6 border-l-4 border-cyber-accent pl-3">Stay Secure</h4>
+                <p class="text-slate-500 text-xs mb-4">Dapatkan update keamanan siber terbaru.</p>
+                <form class="flex flex-col gap-3">
+                    <input type="email" placeholder="Email Address" class="bg-slate-800/50 border border-slate-700 text-white text-sm rounded px-4 py-2 focus:outline-none focus:border-cyber-accent transition-colors">
+                    <button type="button" class="bg-cyber-accent/10 border border-cyber-accent text-cyber-accent text-sm font-semibold py-2 px-4 rounded hover:bg-cyber-accent hover:text-slate-900 transition-all duration-300">
+                        Subscribe
+                    </button>
+                </form>
             </div>
         </div>
-    </footer>
+
+        <div class="border-t border-slate-800 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-600 text-sm">
+            <p>&copy; 2025 GuardOps Security. All rights reserved.</p>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-cyber-accent transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-cyber-accent transition-colors">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
