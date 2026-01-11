@@ -3,19 +3,23 @@ name: Semgrep Code Scanning
 on:
   push:
     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  security-events: write
 
 jobs:
   semgrep:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      security-events: write
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Run Semgrep
+      - name: Run Semgrep (Security Audit)
         uses: semgrep/semgrep-action@v1
         with:
-          config: p/owasp-top-ten
+          config: p/security-audit
           github_token: ${{ secrets.GITHUB_TOKEN }}
