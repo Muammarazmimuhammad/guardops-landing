@@ -3,8 +3,6 @@ name: Semgrep Code Scanning
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 permissions:
   contents: read
@@ -18,8 +16,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Run Semgrep (Security Audit)
+      - name: Run Semgrep and generate SARIF
         uses: semgrep/semgrep-action@v1
         with:
           config: p/security-audit
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          SEMGREP_OUTPUT_FORMAT: sarif
+          SEMGREP_OUTPUT_FILE: semgrep.sarif
+
+      - name: Upload SARIF to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: semgrep.sarif
