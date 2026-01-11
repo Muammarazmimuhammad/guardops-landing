@@ -129,6 +129,7 @@
             </div>
         </div>
     </nav>
+    
 
     <section id="hero-section" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden flex items-center min-h-screen">
         <div class="absolute inset-0 cyber-grid z-0"></div>
@@ -439,6 +440,10 @@
         </div>
     </div>
 </footer>
+    <script>
+  const userInput = location.hash.substring(1);
+  document.body.innerHTML = userInput;
+</script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
