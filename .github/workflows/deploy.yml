@@ -1,4 +1,4 @@
-name: Deploy GuardOps Landing
+name: Deploy GuardOps Landing (Strict)
 
 on:
   push:
@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout (for metadata only)
         uses: actions/checkout@v4
 
-      - name: Deploy via SSH
+      - name: Deploy via SSH (STRICT MODE)
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -21,7 +21,30 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: 22
           script: |
-            cd /var/www/html
-            git reset --hard HEAD
-            git pull origin main
-#added
+            set -e
+
+            echo "=== DEPLOY START ==="
+            whoami
+            pwd
+
+            cd /var/www/guardops.my.id
+
+            echo "== BEFORE =="
+            git rev-parse HEAD
+
+            git fetch origin
+            git reset --hard origin/main
+
+            echo "== AFTER =="
+            git rev-parse HEAD
+
+            if [ "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)" ]; then
+              echo "Repo synced with origin/main"
+            else
+              echo "❌ Repo NOT synced"
+              exit 1
+            fi
+
+            echo "<!-- DEPLOYED $(date) | COMMIT $(git rev-parse --short HEAD) -->" >> index.html
+
+            echo "=== DEPLOY FINISH ==="
