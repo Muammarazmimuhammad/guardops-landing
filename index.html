@@ -1,211 +1,299 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GuardOps – Advanced Cyber Security</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GuardOps – Cyber Security Solutions</title>
 
-<!-- Tailwind (STABLE CDN) -->
-<script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
 
-<!-- Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<style>
-:root{
---dark:#0B1120;
---card:#162032;
---primary:#0ea5e9;
---accent:#10b981;
-}
-body{font-family:Inter,sans-serif}
-.font-tech{font-family:Orbitron,sans-serif}
+    <style>
+        :root {
+            --dark: #0B1120;
+            --primary: #0ea5e9;
+            --accent: #10b981;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--dark); color: #e2e8f0; }
+        .font-tech { font-family: 'Orbitron', sans-serif; }
 
-/* reveal */
-.reveal{opacity:0;transform:translateY(30px);transition:.8s cubic-bezier(.4,0,.2,1)}
-.reveal.show{opacity:1;transform:none}
+        /* Smooth Reveal Animation */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.show { opacity: 1; transform: translateY(0); }
 
-/* typing cursor */
-.cursor{border-right:2px solid var(--accent);animation:blink 1s infinite}
-@keyframes blink{50%{border-color:transparent}}
+        /* Cursor Typing */
+        .cursor { border-right: 2px solid var(--accent); animation: blink 1s infinite; }
+        @keyframes blink { 50% { border-color: transparent; } }
 
-/* grid bg */
-.grid-bg{
-background-size:40px 40px;
-background-image:
-linear-gradient(to right,rgba(255,255,255,.03) 1px,transparent 1px),
-linear-gradient(to bottom,rgba(255,255,255,.03) 1px,transparent 1px);
-}
-</style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        /* Background Pattern */
+        .grid-bg {
+            background-size: 50px 50px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+
+        /* Glass Effect Cards */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+    </style>
 </head>
 
-<body class="bg-[var(--dark)] text-slate-300 antialiased">
+<body class="antialiased overflow-x-hidden">
 
-<!-- NAV -->
-<nav id="nav" class="fixed w-full z-50 border-b border-transparent">
-<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-<div class="flex items-center gap-3 cursor-pointer" onclick="scrollTo({top:0,behavior:'smooth'})">
-<div class="w-10 h-10 bg-gradient-to-br from-sky-500 to-emerald-400 rounded-lg flex items-center justify-center">
-<i class="fas fa-shield-halved text-white"></i>
-</div>
-<span class="font-tech text-xl font-bold text-white">Guard<span class="text-emerald-400">Ops</span></span>
-</div>
+    <nav id="nav" class="fixed w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer select-none" onclick="scrollTo({top:0,behavior:'smooth'})">
+                <div class="w-10 h-10 bg-gradient-to-br from-sky-500 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-900/20">
+                    <i class="fas fa-shield-halved text-white text-lg"></i>
+                </div>
+                <span class="font-tech text-xl font-bold text-white tracking-wide">Guard<span class="text-emerald-400">Ops</span></span>
+            </div>
 
-<div class="hidden md:flex gap-8 items-center">
-<a href="#about" class="hover:text-emerald-400">Tentang</a>
-<a href="#services" class="hover:text-emerald-400">Layanan</a>
-<a href="#team" class="hover:text-emerald-400">Tim</a>
-<a href="#contact" class="px-5 py-2 border border-emerald-400/40 rounded-full text-emerald-400 hover:bg-emerald-400 hover:text-slate-900 transition">
-Hubungi
-</a>
-</div>
+            <div class="hidden md:flex gap-8 items-center text-sm font-semibold text-slate-300">
+                <a href="#about" class="hover:text-white transition">Tentang</a>
+                <a href="#services" class="hover:text-white transition">Layanan</a>
+                <a href="#team" class="hover:text-white transition">Tim</a>
+                <a href="#contact" class="px-6 py-2.5 border border-emerald-500/30 rounded-full text-emerald-400 hover:bg-emerald-500 hover:text-slate-900 transition shadow-[0_0_15px_-3px_rgba(16,185,129,0.3)]">
+                    Hubungi Kami
+                </a>
+            </div>
 
-<button class="md:hidden" onclick="menu.classList.toggle('hidden')">
-<i class="fas fa-bars text-2xl"></i>
-</button>
-</div>
+            <button class="md:hidden text-white" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
 
-<div id="menu" class="hidden md:hidden bg-[var(--card)] border-t border-slate-800">
-<a href="#about" class="block px-6 py-3">Tentang</a>
-<a href="#services" class="block px-6 py-3">Layanan</a>
-<a href="#team" class="block px-6 py-3">Tim</a>
-</div>
-</nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-[#0f172a] border-t border-slate-800 absolute w-full">
+            <a href="#about" class="block px-6 py-4 hover:bg-slate-800">Tentang</a>
+            <a href="#services" class="block px-6 py-4 hover:bg-slate-800">Layanan</a>
+            <a href="#team" class="block px-6 py-4 hover:bg-slate-800">Tim</a>
+        </div>
+    </nav>
 
-<!-- HERO -->
-<section class="min-h-screen pt-32 flex items-center relative">
-<div class="absolute inset-0 grid-bg"></div>
+    <section class="min-h-screen pt-32 flex items-center relative overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[100px] -z-10"></div>
+        <div class="absolute inset-0 grid-bg -z-10"></div>
 
-<div class="max-w-7xl mx-auto px-6 text-center relative">
-<span class="inline-block mb-6 px-4 py-1 text-xs border border-slate-700 rounded-full reveal">
-<i class="fas fa-check-circle text-emerald-400 mr-2"></i> Enterprise Cyber Defense
-</span>
+        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-700 bg-slate-800/50 backdrop-blur-sm text-xs font-semibold text-emerald-400 mb-8 reveal">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                Secure Your Digital Future
+            </div>
 
-<h1 class="text-5xl md:text-7xl font-tech font-bold text-white mb-6 reveal">
-GuardOps<br>
-<span id="typing" class="bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent"></span><span class="cursor">|</span>
-</h1>
+            <h1 class="text-5xl md:text-7xl font-tech font-bold text-white mb-6 leading-tight reveal">
+                Advanced Defense for <br>
+                <span id="typing" class="bg-gradient-to-r from-sky-400 via-emerald-400 to-teal-300 bg-clip-text text-transparent"></span><span class="cursor">|</span>
+            </h1>
 
-<p class="max-w-2xl mx-auto text-lg text-slate-400 mb-10 reveal">
-Menjadi gerbang terdepan pelindung <span class="text-white font-semibold">infrastruktur digital</span> Anda melalui teknologi keamanan modern dan AI Threat Detection.
-</p>
+            <p class="max-w-2xl mx-auto text-lg text-slate-400 mb-10 leading-relaxed reveal">
+                GuardOps menghadirkan perlindungan siber menyeluruh dengan teknologi 
+                <span class="text-slate-200 font-medium">Zero Trust</span> dan <span class="text-slate-200 font-medium">AI Threat Detection</span> untuk mengamankan aset digital perusahaan Anda dari ancaman global.
+            </p>
 
-<div class="flex flex-col sm:flex-row justify-center gap-4 reveal">
-<a href="#services" class="px-8 py-4 bg-emerald-400 text-slate-900 font-bold rounded-lg hover:scale-105 transition">
-<i class="fas fa-search mr-2"></i> Lihat Solusi
-</a>
-<a href="#about" class="px-8 py-4 border border-slate-600 rounded-lg hover:border-emerald-400 hover:text-emerald-400 transition">
-<i class="fas fa-user-astronaut mr-2"></i> Profil Perusahaan
-</a>
-</div>
-</div>
-</section>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 reveal">
+                <a href="#services" class="px-8 py-4 bg-emerald-500 text-slate-900 font-bold rounded-xl hover:bg-emerald-400 hover:scale-105 transition shadow-lg shadow-emerald-500/20">
+                    Eksplorasi Layanan
+                </a>
+                <a href="#about" class="px-8 py-4 border border-slate-600 rounded-xl hover:border-emerald-400 hover:text-white transition bg-slate-800/30">
+                    Tentang Kami
+                </a>
+            </div>
+        </div>
+    </section>
 
-<!-- TRUST -->
-<section class="py-16 bg-[var(--card)] text-center">
-<h2 class="text-2xl font-tech text-white italic reveal">
-"Kepercayaan dibangun di atas keamanan."
-</h2>
-</section>
+    <section id="about" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <h2 class="text-emerald-400 font-tech text-sm tracking-wider uppercase mb-2">Tentang Perusahaan</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">Membangun Benteng Digital di Era Konektivitas</h3>
+                    <p class="text-slate-400 mb-6 leading-relaxed">
+                        GuardOps didirikan dengan satu tujuan: memberikan rasa aman di tengah ketidakpastian dunia siber. Kami menggabungkan keahlian manusia dengan kecerdasan buatan untuk menciptakan ekosistem keamanan yang adaptif.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-emerald-500"></i>
+                            <span class="text-slate-300">Monitoring 24/7 Real-time</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-emerald-500"></i>
+                            <span class="text-slate-300">Standardisasi Keamanan Global</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4 reveal">
+                    <div class="glass-card p-6 rounded-2xl text-center">
+                        <i class="fas fa-shield-virus text-4xl text-sky-400 mb-4"></i>
+                        <h4 class="font-bold text-white">Threat Intel</h4>
+                        <p class="text-xs text-slate-500 mt-2">Deteksi Dini</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl text-center translate-y-8">
+                        <i class="fas fa-server text-4xl text-emerald-400 mb-4"></i>
+                        <h4 class="font-bold text-white">Infrastructure</h4>
+                        <p class="text-xs text-slate-500 mt-2">Ketahanan Sistem</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- ABOUT -->
-<section id="about" class="py-24">
-<div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10">
-<div class="bg-[var(--card)] p-8 rounded-2xl reveal">
-<i class="fas fa-eye text-emerald-400 text-4xl mb-4"></i>
-<h3 class="text-2xl font-bold text-white mb-4">Visi</h3>
-<p>Mewujudkan keamanan digital menyeluruh bagi industri modern di Asia Tenggara.</p>
-</div>
+    <section id="team" class="py-24 bg-[#0f1522]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-emerald-400 font-tech text-sm tracking-wider uppercase mb-2">Leadership</h2>
+                <h3 class="text-3xl font-bold text-white">Jajaran Founder & Eksekutif</h3>
+                <p class="text-slate-400 mt-4 max-w-2xl mx-auto">Para visioner di balik strategi pertahanan siber GuardOps.</p>
+            </div>
 
-<div class="bg-[var(--card)] p-8 rounded-2xl reveal">
-<i class="fas fa-bullseye text-sky-400 text-4xl mb-4"></i>
-<h3 class="text-2xl font-bold text-white mb-4">Misi</h3>
-<ul class="space-y-3">
-<li>✔ Perlindungan siber adaptif</li>
-<li>✔ Monitoring & AI Detection</li>
-<li>✔ Transformasi digital aman</li>
-</ul>
-</div>
-</div>
-</section>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <div class="glass-card p-8 rounded-2xl relative group reveal">
+                    <div class="absolute top-6 right-6 text-slate-600 group-hover:text-emerald-400 transition"><i class="fas fa-crown text-xl"></i></div>
+                    <h4 class="text-xl font-bold text-white group-hover:text-emerald-400 transition">Muammar Azmi M.</h4>
+                    <span class="text-xs font-bold bg-emerald-500/10 text-emerald-400 px-2 py-1 rounded mt-2 inline-block">CEO (Chief Executive Officer)</span>
+                    <p class="text-sm text-slate-400 mt-4 border-t border-slate-700/50 pt-4">
+                        Bertanggung jawab atas strategi bisnis global, pengambilan keputusan inti, serta hubungan strategis dengan mitra dan investor.
+                    </p>
+                </div>
 
-<!-- SERVICES -->
-<section id="services" class="py-24 bg-[var(--card)]">
-<div class="max-w-7xl mx-auto px-6">
-<h2 class="text-center text-3xl font-tech text-white mb-12 reveal">Layanan Utama</h2>
+                <div class="glass-card p-8 rounded-2xl relative group reveal">
+                    <div class="absolute top-6 right-6 text-slate-600 group-hover:text-sky-400 transition"><i class="fas fa-microchip text-xl"></i></div>
+                    <h4 class="text-xl font-bold text-white group-hover:text-sky-400 transition">Aqila Apta Shohan</h4>
+                    <span class="text-xs font-bold bg-sky-500/10 text-sky-400 px-2 py-1 rounded mt-2 inline-block">CTO (Chief Technology Officer)</span>
+                    <p class="text-sm text-slate-400 mt-4 border-t border-slate-700/50 pt-4">
+                        Memimpin inovasi teknologi, pengembangan AI threat detection, serta riset dan pengembangan (R&D) sistem keamanan.
+                    </p>
+                </div>
 
-<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-<div class="p-6 border border-slate-700 rounded-xl reveal">
-<h4 class="font-bold text-white mb-2">Network Security</h4>
-<p>Firewall, IDS/IPS, Zero Trust.</p>
-</div>
-<div class="p-6 border border-slate-700 rounded-xl reveal">
-<h4 class="font-bold text-white mb-2">SOC Monitoring</h4>
-<p>24/7 AI-based threat monitoring.</p>
-</div>
-<div class="p-6 border border-slate-700 rounded-xl reveal">
-<h4 class="font-bold text-white mb-2">Penetration Testing</h4>
-<p>Simulasi serangan terkontrol.</p>
-</div>
-</div>
-</div>
-</section>
+                <div class="glass-card p-8 rounded-2xl relative group reveal">
+                    <div class="absolute top-6 right-6 text-slate-600 group-hover:text-indigo-400 transition"><i class="fas fa-gears text-xl"></i></div>
+                    <h4 class="text-xl font-bold text-white group-hover:text-indigo-400 transition">Karim Ahmad Sulaiman</h4>
+                    <span class="text-xs font-bold bg-indigo-500/10 text-indigo-400 px-2 py-1 rounded mt-2 inline-block">COO (Chief Operating Officer)</span>
+                    <p class="text-sm text-slate-400 mt-4 border-t border-slate-700/50 pt-4">
+                        Mengelola operasional harian perusahaan, memastikan kepuasan layanan klien, dan koordinasi tim teknis lapangan.
+                    </p>
+                </div>
 
-<!-- TEAM -->
-<section id="team" class="py-24">
-<div class="max-w-7xl mx-auto px-6">
-<h2 class="text-center text-3xl font-tech text-white mb-12 reveal">Leadership</h2>
+                <div class="glass-card p-8 rounded-2xl relative group reveal">
+                    <div class="absolute top-6 right-6 text-slate-600 group-hover:text-red-400 transition"><i class="fas fa-network-wired text-xl"></i></div>
+                    <h4 class="text-xl font-bold text-white group-hover:text-red-400 transition">Satya Fadhilah Hamdy</h4>
+                    <span class="text-xs font-bold bg-red-500/10 text-red-400 px-2 py-1 rounded mt-2 inline-block">CSA (Chief Security Architect)</span>
+                    <p class="text-sm text-slate-400 mt-4 border-t border-slate-700/50 pt-4">
+                        Arsitek utama di balik rancangan keamanan jaringan klien, implementasi Zero Trust, dan topologi pertahanan siber.
+                    </p>
+                </div>
 
-<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-<div class="bg-[var(--card)] p-6 rounded-xl text-center reveal">
-<h4 class="font-bold text-white">Muammar Azmi</h4>
-<span class="text-emerald-400 text-sm">CEO</span>
-</div>
-<div class="bg-[var(--card)] p-6 rounded-xl text-center reveal">
-<h4 class="font-bold text-white">Aqila Apta</h4>
-<span class="text-sky-400 text-sm">CTO</span>
-</div>
-<div class="bg-[var(--card)] p-6 rounded-xl text-center reveal">
-<h4 class="font-bold text-white">Satya F. Hamdi</h4>
-<span class="text-red-400 text-sm">CSA</span>
-</div>
-</div>
-</div>
-</section>
+                <div class="glass-card p-8 rounded-2xl relative group reveal">
+                    <div class="absolute top-6 right-6 text-slate-600 group-hover:text-yellow-400 transition"><i class="fas fa-chart-line text-xl"></i></div>
+                    <h4 class="text-xl font-bold text-white group-hover:text-yellow-400 transition">Angga Kurniansyah</h4>
+                    <span class="text-xs font-bold bg-yellow-500/10 text-yellow-400 px-2 py-1 rounded mt-2 inline-block">CFO (Chief Financial Officer)</span>
+                    <p class="text-sm text-slate-400 mt-4 border-t border-slate-700/50 pt-4">
+                        Mengelola kesehatan finansial perusahaan, perencanaan anggaran strategis, dan monetisasi produk layanan.
+                    </p>
+                </div>
 
-<!-- FOOTER -->
-<footer id="contact" class="bg-[var(--card)] py-12 text-center text-sm text-slate-500">
-<p>© 2025 GuardOps Security. All rights reserved.</p>
-</footer>
+                <div class="glass-card p-8 rounded-2xl relative group reveal">
+                    <div class="absolute top-6 right-6 text-slate-600 group-hover:text-pink-400 transition"><i class="fas fa-bullhorn text-xl"></i></div>
+                    <h4 class="text-xl font-bold text-white group-hover:text-pink-400 transition">Shofwatun Najwa</h4>
+                    <span class="text-xs font-bold bg-pink-500/10 text-pink-400 px-2 py-1 rounded mt-2 inline-block">CMO (Chief Marketing Officer)</span>
+                    <p class="text-sm text-slate-400 mt-4 border-t border-slate-700/50 pt-4">
+                        Bertanggung jawab atas branding GuardOps, strategi komunikasi publik, dan kampanye kesadaran keamanan siber.
+                    </p>
+                </div>
 
-<script>
-/* navbar */
-addEventListener('scroll',()=>nav.classList.toggle(
-'bg-black/70 backdrop-blur border-slate-800',scrollY>40))
+            </div>
+        </div>
+    </section>
 
-/* typing */
-const t="Digital Boundaries";let i=0,d=false;
-const el=document.getElementById("typing");
-function type(){
-el.textContent=d?t.slice(0,--i):t.slice(0,++i);
-if(i===t.length||i===0)d=!d;
-setTimeout(type,d?60:120)
-}
-setTimeout(type,800)
+    <footer id="contact" class="bg-slate-900 pt-16 pb-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="mb-8">
+                <span class="font-tech text-2xl font-bold text-white">Guard<span class="text-emerald-400">Ops</span></span>
+                <p class="text-slate-500 mt-2">Secure. Monitor. Defend.</p>
+            </div>
+            <div class="flex justify-center gap-6 mb-8">
+                <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-emerald-500 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-emerald-500 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-emerald-500 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="text-sm text-slate-600">© 2025 GuardOps Security. All rights reserved.</p>
+        </div>
+    </footer>
 
-/* reveal */
-const io=new IntersectionObserver(e=>{
-e.forEach(x=>{
-if(x.isIntersecting){x.target.classList.add("show");io.unobserve(x.target)}
-})
-},{threshold:.15});
-document.querySelectorAll(".reveal").forEach(el=>io.observe(el))
-</script>
+    <script>
+        // Navbar Blur Effect on Scroll
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                nav.classList.add('bg-[#0B1120]/80', 'backdrop-blur-md', 'border-b', 'border-slate-800');
+            } else {
+                nav.classList.remove('bg-[#0B1120]/80', 'backdrop-blur-md', 'border-b', 'border-slate-800');
+            }
+        });
+
+        // Typing Effect
+        const words = ["Cloud Security", "Cyber Defense", "Secure Operations"];
+        let i = 0;
+        let timer;
+
+        function typeWriter() {
+            const heading = words[i % words.length];
+            const element = document.getElementById("typing");
+            let currentText = element.textContent;
+            let isDeleting = element.getAttribute("data-deleting") === "true";
+
+            if (isDeleting) {
+                element.textContent = heading.substring(0, currentText.length - 1);
+            } else {
+                element.textContent = heading.substring(0, currentText.length + 1);
+            }
+
+            if (!isDeleting && element.textContent === heading) {
+                element.setAttribute("data-deleting", "true");
+                timer = setTimeout(typeWriter, 2000);
+            } else if (isDeleting && element.textContent === "") {
+                element.setAttribute("data-deleting", "false");
+                i++;
+                timer = setTimeout(typeWriter, 500);
+            } else {
+                timer = setTimeout(typeWriter, isDeleting ? 50 : 100);
+            }
+        }
+        typeWriter();
+
+        // Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    </script>
 
 </body>
 </html>
