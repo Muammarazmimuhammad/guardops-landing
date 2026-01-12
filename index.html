@@ -1,557 +1,211 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GuardOps - Advanced Cyber Security</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GuardOps – Advanced Cyber Security</title>
 
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+<!-- Tailwind (STABLE CDN) -->
+<script src="https://cdn.tailwindcss.com"></script>
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        tech: ['Orbitron', 'sans-serif'],
-                    },
-                    colors: {
-                        cyber: {
-                            dark: '#0B1120',      // Deep Navy/Black
-                            card: '#162032',      // Card Background
-                            primary: '#0ea5e9',   // Sky Blue
-                            accent: '#10b981',    // Emerald Green
-                            glow: '#34d399'
-                        }
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'spin-slow': 'spin 12s linear infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <style>
-        /* --- CUSTOM CSS FOR DYNAMICS --- */
-        
-        /* 1. Scroll Reveal Logic */
-        .reveal-element {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-        }
-        .reveal-element.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
 
-        /* Staggered Delays */
-        .delay-100 { transition-delay: 100ms; }
-        .delay-200 { transition-delay: 200ms; }
-        .delay-300 { transition-delay: 300ms; }
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        /* 2. Cursor Blink Effect */
-        .cursor-blink {
-            border-right: 2px solid #10b981;
-            animation: blink 1s step-end infinite;
-        }
-        @keyframes blink { 50% { border-color: transparent; } }
+<style>
+:root{
+--dark:#0B1120;
+--card:#162032;
+--primary:#0ea5e9;
+--accent:#10b981;
+}
+body{font-family:Inter,sans-serif}
+.font-tech{font-family:Orbitron,sans-serif}
 
-        /* 3. Cyber Grid Background */
-        .cyber-grid {
-            background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
-        }
+/* reveal */
+.reveal{opacity:0;transform:translateY(30px);transition:.8s cubic-bezier(.4,0,.2,1)}
+.reveal.show{opacity:1;transform:none}
 
-        /* 4. 3D Tilt Wrapper */
-        .tilt-card {
-            transform-style: preserve-3d;
-            transform: perspective(1000px);
-        }
-    </style>
+/* typing cursor */
+.cursor{border-right:2px solid var(--accent);animation:blink 1s infinite}
+@keyframes blink{50%{border-color:transparent}}
+
+/* grid bg */
+.grid-bg{
+background-size:40px 40px;
+background-image:
+linear-gradient(to right,rgba(255,255,255,.03) 1px,transparent 1px),
+linear-gradient(to bottom,rgba(255,255,255,.03) 1px,transparent 1px);
+}
+</style>
 </head>
-<body class="bg-cyber-dark text-slate-300 font-sans antialiased overflow-x-hidden selection:bg-cyber-accent selection:text-cyber-dark">
 
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 border-b border-transparent">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <div class="flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <div class="w-10 h-10 bg-gradient-to-br from-cyber-primary to-cyber-accent rounded-lg flex items-center justify-center mr-3 shadow-[0_0_15px_rgba(16,185,129,0.5)]">
-                        <i class="fas fa-shield-alt text-white text-xl"></i>
-                    </div>
-                    <span class="font-tech text-2xl font-bold text-white tracking-wider">
-                        Guard<span class="text-cyber-accent">Ops</span>
-                    </span>
-                </div>
+<body class="bg-[var(--dark)] text-slate-300 antialiased">
 
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#about" class="nav-link hover:text-cyber-accent transition-colors px-3 py-2 text-sm font-medium">Tentang</a>
-                        <a href="#services" class="nav-link hover:text-cyber-accent transition-colors px-3 py-2 text-sm font-medium">Layanan</a>
-                        <a href="#team" class="nav-link hover:text-cyber-accent transition-colors px-3 py-2 text-sm font-medium">Tim</a>
-                        <a href="#contact" class="bg-cyber-accent/10 border border-cyber-accent text-cyber-accent hover:bg-cyber-accent hover:text-white px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 shadow-[0_0_10px_rgba(16,185,129,0.2)] hover:shadow-[0_0_20px_rgba(16,185,129,0.6)]">
-                            Hubungi Kami <i class="fas fa-arrow-right ml-2"></i> 
-                        </a>
-                    </div>
-                </div>
+<!-- NAV -->
+<nav id="nav" class="fixed w-full z-50 border-b border-transparent">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-3 cursor-pointer" onclick="scrollTo({top:0,behavior:'smooth'})">
+<div class="w-10 h-10 bg-gradient-to-br from-sky-500 to-emerald-400 rounded-lg flex items-center justify-center">
+<i class="fas fa-shield-halved text-white"></i>
+</div>
+<span class="font-tech text-xl font-bold text-white">Guard<span class="text-emerald-400">Ops</span></span>
+</div>
 
-                <div class="-mr-2 flex md:hidden">
-                    <button type="button" onclick="toggleMenu()" class="text-slate-300 hover:text-white p-2">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+<div class="hidden md:flex gap-8 items-center">
+<a href="#about" class="hover:text-emerald-400">Tentang</a>
+<a href="#services" class="hover:text-emerald-400">Layanan</a>
+<a href="#team" class="hover:text-emerald-400">Tim</a>
+<a href="#contact" class="px-5 py-2 border border-emerald-400/40 rounded-full text-emerald-400 hover:bg-emerald-400 hover:text-slate-900 transition">
+Hubungi
+</a>
+</div>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-cyber-card border-b border-slate-800 absolute w-full shadow-2xl">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#about" class="block px-3 py-2 text-base font-medium text-white hover:bg-slate-800 rounded-md">Tentang</a>
-                <a href="#services" class="block px-3 py-2 text-base font-medium text-white hover:bg-slate-800 rounded-md">Layanan</a>
-                <a href="#team" class="block px-3 py-2 text-base font-medium text-white hover:bg-slate-800 rounded-md">Tim</a>
-            </div>
-        </div>
-    </nav>
-    
+<button class="md:hidden" onclick="menu.classList.toggle('hidden')">
+<i class="fas fa-bars text-2xl"></i>
+</button>
+</div>
 
-    <section id="hero-section" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden flex items-center min-h-screen">
-        <div class="absolute inset-0 cyber-grid z-0"></div>
-        
-        <div class="absolute top-20 right-0 w-72 h-72 bg-cyber-accent/10 rounded-full blur-[100px] animate-pulse-slow pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-cyber-primary/10 rounded-full blur-[100px] animate-float pointer-events-none"></div>
+<div id="menu" class="hidden md:hidden bg-[var(--card)] border-t border-slate-800">
+<a href="#about" class="block px-6 py-3">Tentang</a>
+<a href="#services" class="block px-6 py-3">Layanan</a>
+<a href="#team" class="block px-6 py-3">Tim</a>
+</div>
+</nav>
 
-        <div id="obj-left" class="hidden lg:flex absolute left-16 top-1/3 z-20">
-            <div class="animate-float"> 
-                <div class="relative w-24 h-24 bg-slate-800/40 backdrop-blur-md border border-cyber-accent/30 rounded-2xl flex items-center justify-center transform rotate-12 hover:rotate-0 transition-all duration-500 hover:border-cyber-accent hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] group cursor-pointer">
-                    <div class="absolute inset-0 bg-cyber-accent/10 rounded-2xl animate-pulse"></div>
-                    <i class="fas fa-cube text-4xl text-cyber-accent opacity-80 group-hover:opacity-100 transition-opacity"></i>
-                    <div class="absolute -top-2 -right-2 w-3 h-3 bg-cyber-accent rounded-full animate-bounce"></div>
-                </div>
-            </div>
-        </div>
+<!-- HERO -->
+<section class="min-h-screen pt-32 flex items-center relative">
+<div class="absolute inset-0 grid-bg"></div>
 
-        <div id="obj-right" class="hidden lg:flex absolute right-16 bottom-1/3 z-20">
-            <div class="animate-float" style="animation-delay: 1s;">
-                <div class="relative w-28 h-28 bg-slate-800/40 backdrop-blur-md border border-cyber-primary/30 rounded-full flex items-center justify-center hover:scale-110 transition-all duration-500 hover:border-cyber-primary hover:shadow-[0_0_30px_rgba(14,165,233,0.4)] group cursor-pointer">
-                    <div class="absolute inset-0 border border-dashed border-cyber-primary/30 rounded-full animate-spin-slow"></div>
-                    <i class="fas fa-shield-halved text-5xl text-cyber-primary opacity-80 group-hover:opacity-100 transition-opacity"></i>
-                    <div class="absolute -bottom-2 -left-2 bg-cyber-dark px-2 py-1 rounded border border-cyber-primary text-[10px] text-cyber-primary font-tech">SECURE</div>
-                </div>
-            </div>
-        </div>
+<div class="max-w-7xl mx-auto px-6 text-center relative">
+<span class="inline-block mb-6 px-4 py-1 text-xs border border-slate-700 rounded-full reveal">
+<i class="fas fa-check-circle text-emerald-400 mr-2"></i> Enterprise Cyber Defense
+</span>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <div class="inline-block px-4 py-1 rounded-full border border-slate-700 bg-slate-800/50 backdrop-blur-sm mb-6 reveal-element hover:border-cyber-accent transition-colors cursor-default">
-                <span class="text-cyber-accent text-xs font-bold tracking-widest uppercase"><i class="fas fa-check-circle mr-2"></i>SentinelNet Security Rebranded</span>
-            </div>
-            
-            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 font-tech tracking-tight reveal-element delay-100">
-                GuardOps<br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-primary to-cyber-accent" id="typing-text"></span><span class="cursor-blink">|</span>
-            </h1>
-            
-            <p class="mt-4 text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed reveal-element delay-200">
-                Menjadi Pintu terdepan pelindung infrastruktur digital Anda dengan teknologi modern <span class="text-white font-semibold relative">
-                    AI Threat Detection
-                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-cyber-accent opacity-50"></span>
-                </span> dan arsitektur keamanan yang adaptif.
-            </p>
-            
-            <div class="flex flex-col sm:flex-row justify-center gap-4 reveal-element delay-300">
-                <a href="#services" class="px-8 py-4 bg-cyber-accent text-cyber-dark font-bold rounded-lg hover:bg-emerald-400 transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(16,185,129,0.4)] flex items-center justify-center gap-2">
-                    <i class="fas fa-search-location"></i> Lihat Solusi
-                </a>
-                <a href="#about" class="px-8 py-4 border border-slate-600 text-white font-medium rounded-lg hover:border-cyber-accent hover:text-cyber-accent transition-all hover:bg-slate-800/50 flex items-center justify-center gap-2">
-                    <i class="fas fa-user-astronaut"></i> Pelajari Profile
-                </a>
-            </div>
-        </div>
-    </section>
+<h1 class="text-5xl md:text-7xl font-tech font-bold text-white mb-6 reveal">
+GuardOps<br>
+<span id="typing" class="bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent"></span><span class="cursor">|</span>
+</h1>
 
-    <section class="py-12 border-y border-slate-800 bg-cyber-card/30 relative">
-        <div class="max-w-7xl mx-auto px-4 text-center reveal-element">
-            <i class="fas fa-fingerprint text-5xl text-slate-700 mb-4 block mx-auto hover:text-cyber-accent transition-colors duration-500"></i>
-            <h2 class="text-2xl md:text-3xl font-bold text-white italic font-tech">"Kepercayaan dibangun di atas keamanan."</h2>
-        </div>
-    </section>
+<p class="max-w-2xl mx-auto text-lg text-slate-400 mb-10 reveal">
+Menjadi gerbang terdepan pelindung <span class="text-white font-semibold">infrastruktur digital</span> Anda melalui teknologi keamanan modern dan AI Threat Detection.
+</p>
 
-    <section id="about" class="py-24 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 reveal-element">
-                <h2 class="text-cyber-primary font-bold tracking-widest uppercase text-sm mb-2">Who We Are</h2>
-                <h3 class="text-3xl md:text-4xl font-bold text-white font-tech">Visi & Misi</h3>
-            </div>
+<div class="flex flex-col sm:flex-row justify-center gap-4 reveal">
+<a href="#services" class="px-8 py-4 bg-emerald-400 text-slate-900 font-bold rounded-lg hover:scale-105 transition">
+<i class="fas fa-search mr-2"></i> Lihat Solusi
+</a>
+<a href="#about" class="px-8 py-4 border border-slate-600 rounded-lg hover:border-emerald-400 hover:text-emerald-400 transition">
+<i class="fas fa-user-astronaut mr-2"></i> Profil Perusahaan
+</a>
+</div>
+</div>
+</section>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                <div class="js-tilt bg-cyber-card border border-slate-800 p-8 rounded-2xl relative overflow-hidden group reveal-element delay-100">
-                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-cyber-accent/10 rounded-full blur-2xl group-hover:bg-cyber-accent/20 transition-all"></div>
-                    <i class="fas fa-eye text-4xl text-cyber-accent mb-6"></i>
-                    <h4 class="text-2xl font-bold text-white mb-4">Visi Kami</h4>
-                    <p class="text-slate-400 leading-relaxed">
-                        Menjadi penyedia layanan keamanan jaringan terdepan se-indonesia yang mampu menghadirkan perlindungan digital menyeluruh bagi industri modern.
-                    </p>
-                </div>
+<!-- TRUST -->
+<section class="py-16 bg-[var(--card)] text-center">
+<h2 class="text-2xl font-tech text-white italic reveal">
+"Kepercayaan dibangun di atas keamanan."
+</h2>
+</section>
 
-                <div class="js-tilt bg-cyber-card border border-slate-800 p-8 rounded-2xl relative overflow-hidden group reveal-element delay-200">
-                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-cyber-primary/10 rounded-full blur-2xl group-hover:bg-cyber-primary/20 transition-all"></div>
-                    <i class="fas fa-bullseye text-4xl text-cyber-primary mb-6"></i>
-                    <h4 class="text-2xl font-bold text-white mb-4">Misi Kami</h4>
-                    <ul class="space-y-3 text-slate-400">
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check text-cyber-accent mt-1"></i>
-                            <span>Solusi keamanan adaptif & terautomasi.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check text-cyber-accent mt-1"></i>
-                            <span>AI Threat Detection & Monitoring.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check text-cyber-accent mt-1"></i>
-                            <span>Transformasi digital yang aman.</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ABOUT -->
+<section id="about" class="py-24">
+<div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10">
+<div class="bg-[var(--card)] p-8 rounded-2xl reveal">
+<i class="fas fa-eye text-emerald-400 text-4xl mb-4"></i>
+<h3 class="text-2xl font-bold text-white mb-4">Visi</h3>
+<p>Mewujudkan keamanan digital menyeluruh bagi industri modern di Asia Tenggara.</p>
+</div>
 
-    <section id="services" class="py-24 bg-cyber-dark relative border-t border-slate-800/50">
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-800/20 via-cyber-dark to-cyber-dark"></div>
-        
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-16 reveal-element">
-                <h2 class="text-cyber-accent font-bold tracking-widest uppercase text-sm mb-2">Our Expertise</h2>
-                <h3 class="text-3xl md:text-4xl font-bold text-white font-tech">Layanan Utama</h3>
-            </div>
+<div class="bg-[var(--card)] p-8 rounded-2xl reveal">
+<i class="fas fa-bullseye text-sky-400 text-4xl mb-4"></i>
+<h3 class="text-2xl font-bold text-white mb-4">Misi</h3>
+<ul class="space-y-3">
+<li>✔ Perlindungan siber adaptif</li>
+<li>✔ Monitoring & AI Detection</li>
+<li>✔ Transformasi digital aman</li>
+</ul>
+</div>
+</div>
+</section>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="js-tilt bg-cyber-card/50 backdrop-blur border border-slate-700 p-8 rounded-xl hover:border-cyber-accent transition-all duration-300 group reveal-element">
-                    <div class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center mb-6 group-hover:bg-cyber-accent group-hover:scale-110 transition-all duration-300 shadow-lg">
-                        <i class="fas fa-network-wired text-white text-2xl"></i>
-                    </div>
-                    <h4 class="text-xl font-bold text-white mb-3 group-hover:text-cyber-accent transition-colors">Network Security</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Implementasi firewall, segmentasi jaringan, IPS/IDS, dan Zero Trust Architecture.</p>
-                </div>
+<!-- SERVICES -->
+<section id="services" class="py-24 bg-[var(--card)]">
+<div class="max-w-7xl mx-auto px-6">
+<h2 class="text-center text-3xl font-tech text-white mb-12 reveal">Layanan Utama</h2>
 
-                <div class="js-tilt bg-cyber-card/50 backdrop-blur border border-slate-700 p-8 rounded-xl hover:border-cyber-primary transition-all duration-300 group reveal-element delay-100">
-                    <div class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center mb-6 group-hover:bg-cyber-primary group-hover:scale-110 transition-all duration-300 shadow-lg">
-                        <i class="fas fa-robot text-white text-2xl"></i>
-                    </div>
-                    <h4 class="text-xl font-bold text-white mb-3 group-hover:text-cyber-primary transition-colors">SOC AI Monitoring</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Pemantauan ancaman 24/7 berbasis Artificial Intelligence dan pelaporan realtime.</p>
-                </div>
+<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="p-6 border border-slate-700 rounded-xl reveal">
+<h4 class="font-bold text-white mb-2">Network Security</h4>
+<p>Firewall, IDS/IPS, Zero Trust.</p>
+</div>
+<div class="p-6 border border-slate-700 rounded-xl reveal">
+<h4 class="font-bold text-white mb-2">SOC Monitoring</h4>
+<p>24/7 AI-based threat monitoring.</p>
+</div>
+<div class="p-6 border border-slate-700 rounded-xl reveal">
+<h4 class="font-bold text-white mb-2">Penetration Testing</h4>
+<p>Simulasi serangan terkontrol.</p>
+</div>
+</div>
+</div>
+</section>
 
-                <div class="js-tilt bg-cyber-card/50 backdrop-blur border border-slate-700 p-8 rounded-xl hover:border-red-500 transition-all duration-300 group reveal-element delay-200">
-                    <div class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center mb-6 group-hover:bg-red-500 group-hover:scale-110 transition-all duration-300 shadow-lg">
-                        <i class="fas fa-user-secret text-white text-2xl"></i>
-                    </div>
-                    <h4 class="text-xl font-bold text-white mb-3 group-hover:text-red-500 transition-colors">Penetration Testing</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Simulasi serangan siber untuk menemukan celah keamanan sebelum peretas menemukannya.</p>
-                </div>
-                
-                <div class="js-tilt bg-cyber-card/50 backdrop-blur border border-slate-700 p-8 rounded-xl hover:border-orange-500 transition-all duration-300 group reveal-element">
-                    <div class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center mb-6 group-hover:bg-orange-500 group-hover:scale-110 transition-all duration-300 shadow-lg">
-                        <i class="fas fa-fire-extinguisher text-white text-2xl"></i>
-                    </div>
-                    <h4 class="text-xl font-bold text-white mb-3 group-hover:text-orange-500 transition-colors">Incident Response</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Penanganan cepat insiden ransomware, deface, dan kebocoran data.</p>
-                </div>
+<!-- TEAM -->
+<section id="team" class="py-24">
+<div class="max-w-7xl mx-auto px-6">
+<h2 class="text-center text-3xl font-tech text-white mb-12 reveal">Leadership</h2>
 
-                <div class="js-tilt bg-cyber-card/50 backdrop-blur border border-slate-700 p-8 rounded-xl hover:border-purple-500 transition-all duration-300 group reveal-element delay-100">
-                    <div class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center mb-6 group-hover:bg-purple-500 group-hover:scale-110 transition-all duration-300 shadow-lg">
-                        <i class="fas fa-cloud text-white text-2xl"></i>
-                    </div>
-                    <h4 class="text-xl font-bold text-white mb-3 group-hover:text-purple-500 transition-colors">Cloud Security</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Pengamanan infrastruktur cloud: AWS, GCP, Azure.</p>
-                </div>
+<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="bg-[var(--card)] p-6 rounded-xl text-center reveal">
+<h4 class="font-bold text-white">Muammar Azmi</h4>
+<span class="text-emerald-400 text-sm">CEO</span>
+</div>
+<div class="bg-[var(--card)] p-6 rounded-xl text-center reveal">
+<h4 class="font-bold text-white">Aqila Apta</h4>
+<span class="text-sky-400 text-sm">CTO</span>
+</div>
+<div class="bg-[var(--card)] p-6 rounded-xl text-center reveal">
+<h4 class="font-bold text-white">Satya F. Hamdi</h4>
+<span class="text-red-400 text-sm">CSA</span>
+</div>
+</div>
+</div>
+</section>
 
-                <div class="js-tilt bg-cyber-card/50 backdrop-blur border border-slate-700 p-8 rounded-xl hover:border-yellow-500 transition-all duration-300 group reveal-element delay-200">
-                    <div class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center mb-6 group-hover:bg-yellow-500 group-hover:scale-110 transition-all duration-300 shadow-lg">
-                        <i class="fas fa-chalkboard-teacher text-white text-2xl"></i>
-                    </div>
-                    <h4 class="text-xl font-bold text-white mb-3 group-hover:text-yellow-500 transition-colors">Security Training</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Edukasi karyawan untuk membangun human firewall yang kuat.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="team" class="py-24 bg-cyber-card/20 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 reveal-element">
-                <h2 class="text-cyber-accent font-bold tracking-widest uppercase text-sm mb-2">Leadership</h2>
-                <h3 class="text-3xl md:text-4xl font-bold text-white font-tech">Board of Directors</h3>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-cyber-card p-6 rounded-2xl border border-slate-800 text-center group hover:border-cyber-accent transition-all duration-500 hover:-translate-y-2 reveal-element">
-                    <div class="relative w-28 h-28 mx-auto mb-6">
-                        <div class="absolute inset-0 bg-cyber-accent rounded-full blur opacity-20 group-hover:opacity-50 transition-opacity"></div>
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Muammar&backgroundColor=b6e3f4" alt="CEO" class="relative w-full h-full rounded-full border-2 border-slate-700 group-hover:border-cyber-accent transition-colors">
-                    </div>
-                    <h4 class="text-lg font-bold text-white group-hover:text-cyber-accent transition-colors">Muammar Azmi M.</h4>
-                    <span class="inline-block bg-slate-800 text-cyber-accent text-xs font-bold px-3 py-1 rounded-full mt-2 mb-3">CEO</span>
-                    <p class="text-xs text-slate-500">Business Strategy & Decision Maker</p>
-                </div>
-
-                <div class="bg-cyber-card p-6 rounded-2xl border border-slate-800 text-center group hover:border-cyber-primary transition-all duration-500 hover:-translate-y-2 reveal-element delay-100">
-                    <div class="relative w-28 h-28 mx-auto mb-6">
-                        <div class="absolute inset-0 bg-cyber-primary rounded-full blur opacity-20 group-hover:opacity-50 transition-opacity"></div>
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aqila&backgroundColor=c0aede" alt="CTO" class="relative w-full h-full rounded-full border-2 border-slate-700 group-hover:border-cyber-primary transition-colors">
-                    </div>
-                    <h4 class="text-lg font-bold text-white group-hover:text-cyber-primary transition-colors">Aqila Apta Shohan</h4>
-                    <span class="inline-block bg-slate-800 text-cyber-primary text-xs font-bold px-3 py-1 rounded-full mt-2 mb-3">CTO</span>
-                    <p class="text-xs text-slate-500">AI Threat Detection & R&D</p>
-                </div>
-
-                <div class="bg-cyber-card p-6 rounded-2xl border border-slate-800 text-center group hover:border-slate-400 transition-all duration-500 hover:-translate-y-2 reveal-element delay-200">
-                    <div class="relative w-28 h-28 mx-auto mb-6">
-                        <div class="absolute inset-0 bg-slate-400 rounded-full blur opacity-20 group-hover:opacity-50 transition-opacity"></div>
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Karim&backgroundColor=ffdfbf" alt="COO" class="relative w-full h-full rounded-full border-2 border-slate-700 group-hover:border-slate-400 transition-colors">
-                    </div>
-                    <h4 class="text-lg font-bold text-white group-hover:text-slate-300 transition-colors">Karim Ahmad S.</h4>
-                    <span class="inline-block bg-slate-800 text-slate-400 text-xs font-bold px-3 py-1 rounded-full mt-2 mb-3">COO</span>
-                    <p class="text-xs text-slate-500">Operational Management</p>
-                </div>
-
-                <div class="bg-cyber-card p-6 rounded-2xl border border-slate-800 text-center group hover:border-red-500 transition-all duration-500 hover:-translate-y-2 reveal-element">
-                    <div class="relative w-28 h-28 mx-auto mb-6">
-                        <div class="absolute inset-0 bg-red-500 rounded-full blur opacity-20 group-hover:opacity-50 transition-opacity"></div>
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Satya&backgroundColor=ffdfbf" alt="CSA" class="relative w-full h-full rounded-full border-2 border-slate-700 group-hover:border-red-500 transition-colors">
-                    </div>
-                    <h4 class="text-lg font-bold text-white group-hover:text-red-500 transition-colors">Satya Fadhilah Hamdi</h4>
-                    <span class="inline-block bg-slate-800 text-red-500 text-xs font-bold px-3 py-1 rounded-full mt-2 mb-3">CSA</span>
-                    <p class="text-xs text-slate-500">Chief Security Architect</p>
-                </div>
-
-                <div class="bg-cyber-card p-6 rounded-2xl border border-slate-800 text-center group hover:border-yellow-500 transition-all duration-500 hover:-translate-y-2 reveal-element delay-100">
-                    <div class="relative w-28 h-28 mx-auto mb-6">
-                        <div class="absolute inset-0 bg-yellow-500 rounded-full blur opacity-20 group-hover:opacity-50 transition-opacity"></div>
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Angga&backgroundColor=b6e3f4" alt="CFO" class="relative w-full h-full rounded-full border-2 border-slate-700 group-hover:border-yellow-500 transition-colors">
-                    </div>
-                    <h4 class="text-lg font-bold text-white group-hover:text-yellow-500 transition-colors"> Angga Fuad Kurniansyah</h4>
-                    <span class="inline-block bg-slate-800 text-yellow-500 text-xs font-bold px-3 py-1 rounded-full mt-2 mb-3">CFO</span>
-                    <p class="text-xs text-slate-500">Financial Management</p>
-                </div>
-
-                <div class="bg-cyber-card p-6 rounded-2xl border border-slate-800 text-center group hover:border-purple-500 transition-all duration-500 hover:-translate-y-2 reveal-element delay-200">
-                    <div class="relative w-28 h-28 mx-auto mb-6">
-                        <div class="absolute inset-0 bg-purple-500 rounded-full blur opacity-20 group-hover:opacity-50 transition-opacity"></div>
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Shofwatun&backgroundColor=c0aede" alt="CMO" class="relative w-full h-full rounded-full border-2 border-slate-700 group-hover:border-purple-500 transition-colors">
-                    </div>
-                    <h4 class="text-lg font-bold text-white group-hover:text-purple-500 transition-colors">Shofwatun Najwa</h4>
-                    <span class="inline-block bg-slate-800 text-purple-500 text-xs font-bold px-3 py-1 rounded-full mt-2 mb-3">CMO</span>
-                    <p class="text-xs text-slate-500">Branding & Communication</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer id="contact" class="relative bg-cyber-card pt-20 pb-10 overflow-hidden">
-    <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyber-accent to-transparent opacity-50"></div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-            
-            <div class="col-span-1 lg:col-span-1 reveal-element">
-                <span class="font-tech text-3xl font-bold text-white tracking-wider flex items-center gap-2">
-                    <i class="fas fa-shield-alt text-cyber-accent"></i>
-                    Guard<span class="text-cyber-accent">Ops</span>
-                </span>
-                <p class="mt-4 text-slate-400 text-sm leading-relaxed">
-                    Menyediakan layanan keamanan jaringan terdepan di Asia Tenggara. Melindungi aset digital Anda dengan teknologi AI adaptif.
-                </p>
-                <div class="mt-6 flex space-x-4">
-                    <a href="#" class="text-slate-400 hover:text-cyber-accent hover:-translate-y-1 transition-all duration-300">
-                        <i class="fab fa-linkedin text-xl"></i>
-                    </a>
-                    <a href="#" class="text-slate-400 hover:text-cyber-accent hover:-translate-y-1 transition-all duration-300">
-                        <i class="fab fa-github text-xl"></i>
-                    </a>
-                    <a href="#" class="text-slate-400 hover:text-cyber-accent hover:-translate-y-1 transition-all duration-300">
-                        <i class="fab fa-twitter text-xl"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="reveal-element delay-100">
-                <h4 class="text-white font-bold mb-6 border-l-4 border-cyber-accent pl-3">Layanan</h4>
-                <ul class="space-y-3 text-slate-400 text-sm">
-                    <li><a href="#" class="hover:text-cyber-accent hover:pl-2 transition-all duration-300">SOC Monitoring</a></li>
-                    <li><a href="#" class="hover:text-cyber-accent hover:pl-2 transition-all duration-300">Penetration Testing</a></li>
-                    <li><a href="#" class="hover:text-cyber-accent hover:pl-2 transition-all duration-300">Cloud Security</a></li>
-                    <li><a href="#" class="hover:text-cyber-accent hover:pl-2 transition-all duration-300">Incident Response</a></li>
-                </ul>
-            </div>
-
-            <div class="reveal-element delay-200">
-                <h4 class="text-white font-bold mb-6 border-l-4 border-cyber-accent pl-3">Hubungi Kami</h4>
-                <ul class="space-y-4 text-slate-400 text-sm">
-                    <li class="flex items-start gap-3">
-                        <i class="fas fa-envelope text-cyber-accent mt-1"></i> 
-                        <span class="hover:text-white transition-colors cursor-pointer">contact@guardops.id</span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <i class="fas fa-phone text-cyber-accent mt-1"></i> 
-                        <span class="hover:text-white transition-colors cursor-pointer">+62 21 555 0123</span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <i class="fas fa-map-marker-alt text-cyber-accent mt-1"></i> 
-                        <span>Cyber 2 Tower, Jl. H.R. Rasuna Said, Jakarta, Indonesia</span>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="reveal-element delay-300">
-                <h4 class="text-white font-bold mb-6 border-l-4 border-cyber-accent pl-3">Stay Secure</h4>
-                <p class="text-slate-500 text-xs mb-4">Dapatkan update keamanan siber terbaru.</p>
-                <form class="flex flex-col gap-3">
-                    <input type="email" placeholder="Email Address" class="bg-slate-800/50 border border-slate-700 text-white text-sm rounded px-4 py-2 focus:outline-none focus:border-cyber-accent transition-colors">
-                    <button type="button" class="bg-cyber-accent/10 border border-cyber-accent text-cyber-accent text-sm font-semibold py-2 px-4 rounded hover:bg-cyber-accent hover:text-slate-900 transition-all duration-300">
-                        Subscribe
-                    </button>
-                </form>
-            </div>
-        </div>
-
-        <div class="border-t border-slate-800 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-600 text-sm">
-            <p>&copy; 2025 GuardOps Security. All rights reserved.</p>
-            <div class="flex space-x-6">
-                <a href="#" class="hover:text-cyber-accent transition-colors">Privacy Policy</a>
-                <a href="#" class="hover:text-cyber-accent transition-colors">Terms of Service</a>
-            </div>
-        </div>
-    </div>
+<!-- FOOTER -->
+<footer id="contact" class="bg-[var(--card)] py-12 text-center text-sm text-slate-500">
+<p>© 2025 GuardOps Security. All rights reserved.</p>
 </footer>
-    <script>
-  const userInput = location.hash.substring(1);
-  document.body.innerHTML = userInput;
+
+<script>
+/* navbar */
+addEventListener('scroll',()=>nav.classList.toggle(
+'bg-black/70 backdrop-blur border-slate-800',scrollY>40))
+
+/* typing */
+const t="Digital Boundaries";let i=0,d=false;
+const el=document.getElementById("typing");
+function type(){
+el.textContent=d?t.slice(0,--i):t.slice(0,++i);
+if(i===t.length||i===0)d=!d;
+setTimeout(type,d?60:120)
+}
+setTimeout(type,800)
+
+/* reveal */
+const io=new IntersectionObserver(e=>{
+e.forEach(x=>{
+if(x.isIntersecting){x.target.classList.add("show");io.unobserve(x.target)}
+})
+},{threshold:.15});
+document.querySelectorAll(".reveal").forEach(el=>io.observe(el))
 </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // 1. DYNAMIC NAVBAR
-            const navbar = document.getElementById('navbar');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('bg-cyber-dark/90', 'backdrop-blur-md', 'shadow-lg', 'border-slate-800');
-                    navbar.classList.remove('border-transparent');
-                } else {
-                    navbar.classList.remove('bg-cyber-dark/90', 'backdrop-blur-md', 'shadow-lg', 'border-slate-800');
-                    navbar.classList.add('border-transparent');
-                }
-            });
-
-            // 2. TYPING EFFECT
-            const textToType = "Digital Boundaries";
-            const typeTarget = document.getElementById('typing-text');
-            if (typeTarget) {
-                let charIndex = 0;
-                let isDeleting = false;
-                
-                function typeEffect() {
-                    const currentString = textToType;
-                    if (!isDeleting && charIndex < currentString.length) {
-                        typeTarget.innerText += currentString.charAt(charIndex);
-                        charIndex++;
-                        setTimeout(typeEffect, 100);
-                    } else if (isDeleting && charIndex > 0) {
-                        typeTarget.innerText = currentString.substring(0, charIndex - 1);
-                        charIndex--;
-                        setTimeout(typeEffect, 50);
-                    } else {
-                        isDeleting = !isDeleting;
-                        setTimeout(typeEffect, isDeleting ? 2000 : 500);
-                    }
-                }
-                setTimeout(typeEffect, 1000);
-            }
-
-            // 3. SCROLL REVEAL (Intersection Observer)
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.reveal-element').forEach(el => observer.observe(el));
-
-            // 4. 3D TILT EFFECT
-            document.querySelectorAll('.js-tilt').forEach(card => {
-                card.addEventListener('mousemove', function(e) {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    const rotateX = ((y - centerY) / centerY) * -10;
-                    const rotateY = ((x - centerX) / centerX) * 10;
-                    
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-                    card.style.transition = 'none';
-                });
-
-                card.addEventListener('mouseleave', function() {
-                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-                    card.style.transition = 'transform 0.5s ease';
-                });
-            });
-
-            // 5. PARALLAX FLOATING OBJECTS (Objek Kiri & Kanan)
-            const heroSection = document.getElementById('hero-section');
-            const objLeft = document.getElementById('obj-left');
-            const objRight = document.getElementById('obj-right');
-
-            if(heroSection && objLeft && objRight) {
-                heroSection.addEventListener('mousemove', (e) => {
-                    const x = (window.innerWidth - e.pageX * 2) / 100;
-                    const y = (window.innerHeight - e.pageY * 2) / 100;
-
-                    // Apply transform to the OUTER wrapper so it doesn't conflict with inner CSS animation
-                    objLeft.style.transform = `translateX(${x}px) translateY(${y}px)`;
-                    objRight.style.transform = `translateX(${x * -1.5}px) translateY(${y * -1.5}px)`;
-                });
-                
-                heroSection.addEventListener('mouseleave', () => {
-                    objLeft.style.transform = 'translate(0,0)';
-                    objRight.style.transform = 'translate(0,0)';
-                    // Re-enable smooth transition for reset
-                    objLeft.style.transition = 'transform 0.5s ease-out';
-                    objRight.style.transition = 'transform 0.5s ease-out';
-                    
-                    setTimeout(() => {
-                        objLeft.style.transition = 'none';
-                        objRight.style.transition = 'none';
-                    }, 500);
-                });
-            }
-        });
-
-        // Mobile Menu Toggle outside DOMContentLoaded for button access
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
-    </script>
 </body>
 </html>
