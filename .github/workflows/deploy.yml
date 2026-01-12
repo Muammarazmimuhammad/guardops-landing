@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 permissions:
-  contents: read   # 🔐 BATASI TOKEN (INI YANG DIMINTA CODEQL)
+  contents: read   
 
 jobs:
   deploy:
